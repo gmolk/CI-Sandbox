@@ -14,7 +14,6 @@ jobs:
       - name: Create comment
         uses: kyoncy/issue-comment-actions@v1
         with:
-          issue-number: ${{ github.event.issue.number }}
           message: |
             This is a multi-line test comment
             - With GitHub **Markdown** :sparkles:
