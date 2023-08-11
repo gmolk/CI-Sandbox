@@ -5,20 +5,20 @@ on:
     types: [opened]
 
 jobs:
-  comment-with-action:
+  comment-with-api:
     runs-on: ubuntu-latest
     steps:
-      - name: "dump GitHub context"
-        run: echo '${{ toJSON(github.event) }}' | jq
-        shell: bash
-      - name: Create comment
-        uses: kyoncy/issue-comment-actions@v1
-        with:
-          message: |
-            This is a multi-line test comment
-            - With GitHub **Markdown** :sparkles:
-            - Created by [create-or-update-comment][1]
-
-            [1]: asdf
-
-    
+      - name: "Create comment with API"
+        run: |
+          gh api -X POST \
+            http://api.github.com/repo/${ORGANIZATION}/${REPOSITORY}/issues/${ISSUE_NUMBER}/comments \
+            -f body='
+            Comment body, yipee.
+            '
+            
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ORGANIZATION: ${{ github.event.organization.login }}
+          REPOSITORY: ${{ github.event.repository.name }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+  
