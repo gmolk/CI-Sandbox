@@ -18,5 +18,6 @@ jobs:
       - uses: BedrockStreaming/pr-size-labeler@v2.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          exclude_files: ''
+          exclude_files: ""
+          xs_diff: '10'
           
