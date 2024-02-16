@@ -1,0 +1,22 @@
+name: PR Size Labeler
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  add-size-label:
+    name: Add Size Label
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: BedrockStreaming/pr-size-labeler@v2.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          exclude_files: ''
+          
